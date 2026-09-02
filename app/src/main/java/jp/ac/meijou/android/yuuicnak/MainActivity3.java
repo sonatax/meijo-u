@@ -1,5 +1,6 @@
 package jp.ac.meijou.android.yuuicnak;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,12 @@ public class MainActivity3 extends AppCompatActivity {
             return insets;
         });
 
+        // intent を取得します
+        Intent intent = getIntent();
+        String sentText = intent.getStringExtra("editText");
+        binding.calcField.setText(sentText);
+
+        // 電卓用のコード
         binding.button0.setOnClickListener(view -> {
 
         });
