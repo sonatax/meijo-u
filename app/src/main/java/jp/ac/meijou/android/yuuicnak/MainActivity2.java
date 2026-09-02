@@ -5,10 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Optional;
 
 import jp.ac.meijou.android.yuuicnak.databinding.ActivityMain2Binding;
 
@@ -51,5 +55,32 @@ public class MainActivity2 extends AppCompatActivity {
             intent.putExtra("editText", sentText);
             startActivity(intent);
         });
+
+        // Action Button が押されたとき
+        binding.buttonAction.setOnClickListener(view -> {
+            var intent = new Intent(this, MainActivity3.class);
+            getActivityReuslt.launch(intent);
+        });
     }
+
+    // ActivityResultLauncher は onCreate の外に書く
+   private final ActivityResultLauncher<Intent> getActivityReuslt = registerForActivityResult(
+           new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+              switch (result.getResultCode()) {
+                  case RESULT_OK -> {
+                      Optional.ofNullable(result.getData())
+                              .map(data -> data.getStringExtra("ret"))
+                              .map(text -> "Result : " + text)
+                              .ifPresent(text -> binding.intentResult.setText(text));
+                  }
+                  case RESULT_CANCELED -> {
+                      binding.intentResult.setText("Result : Canceled");
+                  }
+                  default -> {
+                      binding.intentResult.setText("Result : Unknown (" + result.getResultCode() + ")");
+                  }
+              }
+            }
+    );
 }

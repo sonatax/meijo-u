@@ -32,6 +32,21 @@ public class MainActivity3 extends AppCompatActivity {
         String sentText = intent.getStringExtra("editText");
         binding.calcField.setText(sentText);
 
+        // OK button の処理
+        binding.buttonOk.setOnClickListener(view -> {
+            var ok_intent = new Intent();
+            ok_intent.putExtra("ret", "OK");
+            setResult(RESULT_OK, ok_intent);
+            finish();
+        });
+
+        // Cancel button の処理
+        binding.buttonCancel.setOnClickListener(view -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
+
+
         // 電卓用のコード
         binding.button0.setOnClickListener(view -> {
 
