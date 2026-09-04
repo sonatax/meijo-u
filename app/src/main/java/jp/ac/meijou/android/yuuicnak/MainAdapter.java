@@ -42,8 +42,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         private ListItem currentItem;
 
         /**
-         * 新しい ViewHolder インスタンスを生成します。
-         *
+         * Instance
          * @param parent 親のViewGroup
          * @return 生成された ViewHolder
          */
@@ -54,9 +53,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         /**
-         * コンストラクタ。
-         *
-         * @param itemView リストの1行分のView
+         * Construct
+         * @param itemView 1 line View
          */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,9 +66,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         /**
-         * データをViewにバインド（表示）します。
-         *
-         * @param value バインドするListItemのデータ
+         * @param value bind data
          */
         public void onBind(ListItem value) {
             this.currentItem = value;
